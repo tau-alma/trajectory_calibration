@@ -5,7 +5,7 @@ Clone repository to a desired location and install using ``pip``
 
 .. code-block:: bash
 
-   git clone git@github.com:tau-alma/trajectory_calibration_dev.git calibration
+   git clone git@github.com:tau-alma/trajectory_calibration.git calibration
    cd calibration
    pip install .
 
