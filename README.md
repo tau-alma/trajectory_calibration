@@ -2,6 +2,18 @@
 
 This package implements motion-based sensor to sensor extrinsic calibration by solving the hand-eye calibration problem.
 
+If you use the work in an academic context, please cite:
+
+    @misc{https://doi.org/10.48550/arxiv.2303.03129,
+      author = {Välimäki, Tuomas and Garigipati, Bharath and Ghabcheloo, Reza},
+      title = {Motion-based extrinsic sensor-to-sensor calibration:
+               Effect of reference frame selection for new and existing methods},
+      publisher = {arXiv},
+      year = {2023},
+      doi = {10.48550/ARXIV.2303.03129},
+      url = {https://arxiv.org/abs/2303.03129}
+    }
+
 ## Installation
 
 Clone repository to a desired location and install using `pip`
