@@ -131,7 +131,7 @@ def skew(v):
                      [-v[1], v[0], 0]])
 
 
-def rotational_error(T1, T2, T):
+def rotation_error(T1, T2, T, degree=False):
     """Calculates the mean relative rotation error
 
     Parameters
@@ -142,21 +142,21 @@ def rotational_error(T1, T2, T):
         The second sensor trajectory
     T : ndarray, shape (4,4)
         Sensor to sensor calibration
+    degree : bool
+        Whether to return the errors as degree or rad (default)
 
     Returns
     -------
-    double
-        The mean relative rotation error in degrees
+    ndarray
+        The relative rotation errors
     """
-    err = []
-    for T1i, T2i in zip(T1, T2):
-        R = np.linalg.inv(T[:3, :3] @ T2i.R) @ (T1i.R @ T[:3, :3])
-        err.append(np.rad2deg(as_axis_angle(R)[1]))
-    return np.mean(err)
+    error = (Rotation.from_matrix((T @ T2).R).inv() *
+             Rotation.from_matrix((T1 @ T).R)).magnitude()
+    return np.rad2deg(error) if degree else error
 
 
-def translational_error(T1, T2, T):
-    """Calculates the mean relative translation error
+def translation_error(T1, T2, T):
+    """Calculates the relative translation error
 
     Parameters
     ----------
@@ -169,13 +169,10 @@ def translational_error(T1, T2, T):
 
     Returns
     -------
-    double
-        The mean relative translation error
+    ndarray
+        The relative translation errors
     """
-    err = []
-    for T1i, T2i in zip(T1.as_transitions(), T2.as_transitions()):
-        err.append((T1i @ T - T @ T2i)[:3, 3])
-    return np.mean(np.linalg.norm(err, axis=1))
+    return (T1 @ T).get_xyz() - (T @ T2).get_xyz()
 
 
 def get_relative_error(T1, T2, T):
@@ -197,7 +194,8 @@ def get_relative_error(T1, T2, T):
     rotation : double
         The mean relative rotation error in degrees
     """
-    return translational_error(T1, T2, T), rotational_error(T1, T2, T)
+    return (np.mean(np.linalg.norm(translation_error(T1, T2, T), axis=1)),
+            np.mean(rotation_error(T1, T2, T, degree=True)))
 
 
 def get_absolute_error(T, GT):
