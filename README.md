@@ -4,14 +4,17 @@ This package implements motion-based sensor to sensor extrinsic calibration by s
 
 If you use the work in an academic context, please cite:
 
-    @misc{https://doi.org/10.48550/arxiv.2303.03129,
+    @article{valimaki2023,
       author = {Välimäki, Tuomas and Garigipati, Bharath and Ghabcheloo, Reza},
-      title = {Motion-based extrinsic sensor-to-sensor calibration:
-               Effect of reference frame selection for new and existing methods},
-      publisher = {arXiv},
+      title = {Motion-Based Extrinsic Sensor-to-Sensor Calibration: Effect of Reference Frame Selection for New and Existing Methods},
+      journal = {Sensors},
+      volume = {23},
       year = {2023},
-      doi = {10.48550/ARXIV.2303.03129},
-      url = {https://arxiv.org/abs/2303.03129}
+      number = {7},
+      pages = {3740},
+      url = {https://www.mdpi.com/1424-8220/23/7/3740},
+      issn = {1424-8220},
+      doi = {10.3390/s23073740}
     }
 
 ## Installation
